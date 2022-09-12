@@ -94,8 +94,8 @@ problem10: problem10.o
 problem10.o: problem10.c
 	$(CC) $(CFLAGS) -c problem10.c
 
-# Compilation for the problem10 program
-# Command: make problem10
+# Compilation for the problem11 program
+# Command: make problem11
 problem11: problem11.o
 	$(CC) $(CFLAGS) -o problem11 problem11.o
 
