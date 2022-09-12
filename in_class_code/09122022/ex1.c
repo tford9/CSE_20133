@@ -4,14 +4,20 @@ int main() {
   float user_input;
   int threshold = 283;
 
-  scanf("%f", &user_input);
-  if (threshold < user_input)
-  {
-    printf("Your input was greater than %d.\n", threshold);
-  } else
-  {
-    printf("Your input was less than %d. \n", threshold);
-  }
+  scanf("%d", &user_input);
 
+  int next_fib, current_fib, last_fib;
+
+  last_fib = 0;
+  current_fib = 1;
+
+  printf("You wanted %d fib numbers? Too late.\n", user_input);
+
+  for (int i = 0; i < user_input; i++){
+    next_fib = current_fib + last_fib;
+    printf("Current Fib: %d \n", current_fib);
+    last_fib = current_fib;
+    current_fib = next_fib;
+  }
   return 0;
 }
