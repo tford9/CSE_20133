@@ -89,10 +89,18 @@ problem9.o: problem9.c
 # Compilation for the problem10 program
 # Command: make problem10
 problem10: problem10.o
-$(CC) $(CFLAGS) -o problem10 problem10.o
+	$(CC) $(CFLAGS) -o problem10 problem10.o
 
 problem10.o: problem10.c
-$(CC) $(CFLAGS) -c problem10.c
+	$(CC) $(CFLAGS) -c problem10.c
+
+# Compilation for the problem10 program
+# Command: make problem10
+problem11: problem11.o
+	$(CC) $(CFLAGS) -o problem11 problem11.o
+
+problem11.o: problem11.c
+	$(CC) $(CFLAGS) -c problem11.c
 
 clean:
-	rm -rf a.out *.o problem1 problem2 problem3 problem4 problem5
+	rm -rf a.out *.o problem1 problem2 problem3 problem4 problem5 problem6 problem7 problem8 problem9 problem10 problem11
