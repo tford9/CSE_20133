@@ -6,19 +6,18 @@ int main() {
 
   scanf("%d", &user_input);
 
-  int next_fib, current_fib, last_fib;
+  int next_fib, current_fib, previous_fib;
 
-  last_fib = 0;
+  previous_fib = 0;
   current_fib = 1;
 
   printf("You wanted %d fib numbers? Too late.\n", user_input);
 
-
   int i;
   for (i = 0; i < user_input; i++){
-    next_fib = current_fib + last_fib;
-    printf("Current Fib: %d \n", current_fib);
-    last_fib = current_fib;
+    next_fib = current_fib + previous_fib;
+    printf("Fib: %d \n", previous_fib);
+    previous_fib = current_fib;
     current_fib = next_fib;
   }
   return 0;
