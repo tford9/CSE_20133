@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 int main() {
-  float user_input;
+  int user_input;
   int threshold = 283;
 
   scanf("%d", &user_input);
@@ -13,7 +13,9 @@ int main() {
 
   printf("You wanted %d fib numbers? Too late.\n", user_input);
 
-  for (int i = 0; i < user_input; i++){
+
+  int i;
+  for (i = 0; i < user_input; i++){
     next_fib = current_fib + last_fib;
     printf("Current Fib: %d \n", current_fib);
     last_fib = current_fib;
