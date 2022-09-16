@@ -10,7 +10,7 @@ int main() {
 
   // prompt user and then read their input from console
   printf("Please enter a number that you want doubled:\n");
-  scanf("%d", &user_input);
+  scanf("%f", &user_input);
   printf("The value in user_input is: %f \n", user_input);
 
   // call a function and capture what it returns
