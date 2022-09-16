@@ -6,7 +6,7 @@ float double_my_number(float n);
 
 int main() {
   // declare variable that will contain user input
-  int user_input;
+  float user_input;
 
   // prompt user and then read their input from console
   printf("Please enter a number that you want doubled:\n");
