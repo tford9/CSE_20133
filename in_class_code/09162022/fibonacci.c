@@ -6,6 +6,7 @@ int fib_n(int n);
 int main() {
   // declare variable that will contain user input
   int user_input;
+
   // prompt user and then read their input from console
   printf("Please enter how many fibonacci numbers you want.\n")
   scanf("%d", &user_input);
