@@ -14,7 +14,7 @@ int main() {
   printf("The value in user_input is: %f \n", user_input);
 
   // call a function and capture what it returns
-  float return_value = double_my_number(user_input);
+  float return_value = double_my_number(&user_input);
 
   // print the original variable that was passed
   printf("The value in user_input is: %f \n", user_input);
