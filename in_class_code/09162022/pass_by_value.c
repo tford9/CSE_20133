@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 // function prototype declaration
-float double_my_number(float n);
+float double_my_number(float);
 
 
 int main() {
