@@ -13,7 +13,12 @@ int main() {
   scanf("%d", &user_input);
 
   // call a function and capture what it returns
-  int return_value = double_my_number(user_input);
+  float return_value = double_my_number(user_input);
+
+  // print the original variable that was passed
+  printf("The value in user_input is: %f \n", user_input);
+  // print the returned value of our function
+  printf("The value that was returned from double_my_number was: %f\n", return_value);
 
   return 0;
 }
@@ -22,7 +27,7 @@ int main() {
 // function definition
 float double_my_number(float n)
 {
-  float doubled_number = n * 2;
+  n = n * 2;
 
-  return doubled_number;
+  return n;
 }
