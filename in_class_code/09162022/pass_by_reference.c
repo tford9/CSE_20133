@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 // function prototype declaration
-float double_my_number(float n);
+float double_my_number(float& n);
 
 
 int main() {
@@ -26,7 +26,7 @@ int main() {
 
 
 // function definition
-float double_my_number(float n)
+float double_my_number(float& n)
 {
   // we're using n to store our new doubled number inside of
   n = n * 2;
