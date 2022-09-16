@@ -12,6 +12,7 @@ int main() {
   // containing numbers
   printf("%p\n", my_arr);
   printf("In the first position (%p) of my_arr is: %d \n", &my_arr[0], my_arr[0]);
+  printf("In the second position (%p) of my_arr is: %d \n", &my_arr[1], my_arr[1]);
 
   return 0;
 }
