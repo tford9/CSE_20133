@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 void show(void *, int, int);
 void board_initializer(void *,int,int);
@@ -14,38 +15,41 @@ int main()
     board_initializer(board, w, h);
     while(1)
     {
-      show(board, w, h);
+        evolve_board(board, w, h);
+        show(board, w, h);
+        sleep(1);
     }
-
 }
 
-void evolve_board(void *b, int w, int h)
-{
-int (*current_board)[w] = b;
-int evolved_board[w][h];
+void evolve_board(void *b, int w, int h) {
+    int (*current_board)[w] = b;
+    int evolved_board[w][h];
 
-for(int x = 0; x < w; i++)
-{
-  for(int y = 0; y < h; j++)
-  {
-    // get the number of living cells around each cell
-    int n = 0;
-    for (int y1 = y - 1; y1 <= y + 1; y1++)
-    {
-      for (int x1 = x - 1; x1 <= x + 1; x1++)
-      {
-        if (univ[(y1 + h) % h][(x1 + w) % w])
-        {
-          n++;
+    for (int x = 0; x < w; x++) {
+        for (int y = 0; y < h; y++) {
+            int n = 0;
+            for (int y1 = y - 1; y1 <= y + 1; y1++) {
+                for (int x1 = x - 1; x1 <= x + 1; x1++) {
+                    if (current_board[(y1 + h) % h][(x1 + w) % w]) {
+                        n++;
+                    }
+                }
+            }
+            if (current_board[y][x]) {
+                n--;
+            }
+            evolved_board[y][x] = (n == 3 || (n == 2 && current_board[y][x]));
         }
-      }
     }
-  }
+    for (int x = 0; x < w; x++) {
+        for (int y = 0; y < h; y++) {
+            current_board[y][x] = evolved_board[y][x];
+        }
+    }
 }
 
 void show(void *b, int w, int h)
 {
-
     int (*current_board)[w] = b;
 
     printf("\033[0;0H");
@@ -82,14 +86,12 @@ void board_initializer(void *b, int w,int h)
       for (int j = 0; j < h; j++)
       {
           int rand_tenth = rand() % 10;
-          // printf("%d\n", rand_tenth);
           if(rand_tenth == 0){
               empty_board[i][j] = 1;
           } else
           {
              empty_board[i][j] = 0;
           }
-
       }
     }
 }
