@@ -10,7 +10,7 @@ int main()
     int w = 40;
     int h = 40;
 
-    unsigned int board[w][h];
+    int board[w][h];
     board_initializer(board, w, h);
     while(1)
     {
@@ -19,23 +19,28 @@ int main()
 
 }
 
-void evolve_board(void *,int,int)
-int (*current_board)[w] = b;
-
-for(int i = 0; i < w; i++)
+void evolve_board(void *b, int w, int h)
 {
-  for(int j = 0; j < h; j++)
-  {
-    if (i != w-1 && i != 0 && j !=h-1 && j != 0)
-    {
-      for (x = i - 1, y = j - 1; y++,x++)
-      {
+int (*current_board)[w] = b;
+int evolved_board[w][h];
 
+for(int x = 0; x < w; i++)
+{
+  for(int y = 0; y < h; j++)
+  {
+    // get the number of living cells around each cell
+    int n = 0;
+    for (int y1 = y - 1; y1 <= y + 1; y1++)
+    {
+      for (int x1 = x - 1; x1 <= x + 1; x1++)
+      {
+        if (univ[(y1 + h) % h][(x1 + w) % w])
+        {
+          n++;
+        }
       }
     }
   }
-}
-
 }
 
 void show(void *b, int w, int h)
