@@ -13,5 +13,9 @@ evolve: evolve_testbed.o
 evolve_optimized: evolve_testbed_optimized.o
 	$(CC) $(CFLAGS) -o evolve_testbed_optimized evolve_testbed_optimized.o
 
+# multiple dependencies
+conways: conways_game.c conways_game_utilities.c 
+	$(CC) $(CFLAGS) -o ConwaysGame conways_game.c conways_game_utilities.c
+
 clean:
-	rm -rf a.out *.o evolve_testbed evolve_testbed_optimized
+	rm -rf a.out *.o evolve_testbed evolve_testbed_optimized ConwaysGame
