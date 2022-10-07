@@ -73,8 +73,14 @@ class PC:
         fail = [0,1]
         self.clear_build_directory()
         try:
-            shutil.copy2(self.student_pc_dirs[net_id] + '/' + source_file_name,
-                         self.build_directory + '/' + source_file_name)
+            if source_file_name == 'all':
+                files = [f for f in os.listdir(self.student_pc_dirs[net_id]) if f.endswith('.c, .h, .cpp, .hpp')]
+                for f in files:
+                    shutil.copy2(self.student_pc_dirs[net_id] + '/' + f, self.build_directory + '/' + f)
+
+            else:
+                shutil.copy2(self.student_pc_dirs[net_id] + '/' + source_file_name,
+                             self.build_directory + '/' + source_file_name)
         except Exception as e:
             print(f"Copy Failed: {e}")
             return 0, str(e)
