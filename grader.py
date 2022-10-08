@@ -3,9 +3,35 @@ import shutil
 import subprocess
 import sys
 import time
+from dataclasses import dataclass
 from typing import List
 
 import pandas as pd
+
+
+@dataclass
+class TestCase:
+    input_str: str
+    expected_output_str: str
+
+    def __init__(self, i_str, o_str):
+        self.input_str = i_str
+        self.expected_output_str = o_str
+
+    def test_verify_output(self, output: str, closeness: str = "exact"):
+        if closeness == "exact":
+            if self.expected_output_str == output:
+                return True
+            else:
+                return False
+        elif closeness == "contains":
+            if self.expected_output_str in output:
+                return True
+            else:
+                return False
+        elif closeness == "n_close":
+            # figure this logic out later
+            pass
 
 
 def get_dirs(dir_path: str, substring_match=None):
@@ -68,9 +94,9 @@ class PC:
             print(f"deleting {os.path.join(self.build_directory, f)}")
             os.remove(os.path.join(self.build_directory, f))
 
-    def test_student_source(self, net_id='abehnlin', source_file_name: str = None, test_cases=None):
+    def test_student_source(self, net_id='abehnlin', source_file_name: str = None, test_cases: TestCase = None):
         # print(f"Making {net_id}'s {self.pc_name} file: {source_file_name}")
-        fail = [0,1]
+        fail = [0, 1]
         self.clear_build_directory()
         try:
             if source_file_name == 'all':
@@ -112,26 +138,25 @@ class PC:
         tests_failed = 0
 
         if test_cases:
-            for test_input, test_output in test_cases:
+            for idx, test_case in enumerate(test_cases):
+                test_case: TestCase = test_case
                 run_process = subprocess.Popen(cmd,
                                                stdin=subprocess.PIPE,
                                                stdout=subprocess.PIPE,
                                                stderr=subprocess.STDOUT
                                                , encoding='utf-8')
                 try:
-                    grep_stdout = run_process.communicate(input=test_input, timeout=15)[0]
+                    grep_stdout = run_process.communicate(input=test_case.input_str, timeout=15)[0]
                 except Exception as e:
                     print(e)
-                    return 0,str(e)
+                    return 0, str(e)
 
-                if test_output in grep_stdout:
-                    # print(
-                        # f"Test Succeeded: {test_input}|{test_output} \n {net_id}'s {self.pc_name} file: {source_file_name}")
+                if test_case.test_verify_output(grep_stdout, 'contains'):
                     tests_passed += 1
                 else:
                     print(
-                        f"Test Failed: {test_input}|{test_output} \n {net_id}'s {self.pc_name} file: {source_file_name} \n{grep_stdout}")
-
+                        f"{self.pc_name}/{source_file_name} {net_id} \nTest({idx}) Failed: "
+                        f"{test_case.input_str}|{test_case.expected_output_str} \n{grep_stdout}")
                     tests_failed += 1
 
         os.chdir(self.prime_directory)
@@ -142,14 +167,16 @@ class PC:
 if __name__ == '__main__':
     pc = PC(pc_number=2)
 
-    test_cases = {'number_scanner.c': [['30\n', "30.00000"], ['2.6\n', "2.6"]],
-                  'paycheck.c': [['10\n20\n', "610"], ['40\n40\n', "4883"]],
-                  'prog_paycheck.c': [['10\n20\n', "781"], ['12\n38\n', "1761"]],
-                  'sphere_volume.c': [['1\n', "4.1"], ['2.7\n', "82.4"]]
+    tc1 = TestCase('30\n', '30.00000')
+
+    test_cases = {'number_scanner.c': [TestCase('30\n', '30.00000'), TestCase('2.6\n', "2.6")],
+                  'paycheck.c': [TestCase('10\n20\n', "610"), TestCase('40\n40\n', "4883")],
+                  'prog_paycheck.c': [TestCase('10\n20\n', "781"), TestCase('12\n38\n', "1761")],
+                  'sphere_volume.c': [TestCase('1\n', "4.1"), TestCase('2.7\n', "82.4")]
                   }
 
-    df = pd.DataFrame(columns=list(['netid', 'pc']+list(test_cases.keys())))
-    print(list(['netid', 'pc']+list(test_cases.keys())))
+    df = pd.DataFrame(columns=list(['netid', 'pc'] + list(test_cases.keys())))
+    print(list(['netid', 'pc'] + list(test_cases.keys())))
     pc.set_sources(list(test_cases.keys()))
 
     for net_id in pc.student_pc_dirs.keys():
@@ -162,7 +189,7 @@ if __name__ == '__main__':
             if isinstance(tests_failed, str):
                 user_passes[prog] = tests_failed
             else:
-                user_passes[prog] = tests_passed/(tests_failed+tests_passed)*100
+                user_passes[prog] = tests_passed / (tests_failed + tests_passed) * 100
             # time.sleep(1)
 
         user_df = {'netid': net_id, 'pc': pc.pc_name}
