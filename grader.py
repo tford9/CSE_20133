@@ -165,14 +165,22 @@ class PC:
 
 
 if __name__ == '__main__':
-    pc = PC(pc_number=2)
+    pc = PC(pc_number=3)
 
-    tc1 = TestCase('30\n', '30.00000')
+    # test_cases = {'number_scanner.c': [TestCase('30\n', '30.00000'), TestCase('2.6\n', "2.6")],
+    #               'paycheck.c': [TestCase('10\n20\n', "610"), TestCase('40\n40\n', "4883")],
+    #               'prog_paycheck.c': [TestCase('10\n20\n', "781"), TestCase('12\n38\n', "1761")],
+    #               'sphere_volume.c': [TestCase('1\n', "4.1"), TestCase('2.7\n', "82.4")]
+    #               }
 
-    test_cases = {'number_scanner.c': [TestCase('30\n', '30.00000'), TestCase('2.6\n', "2.6")],
-                  'paycheck.c': [TestCase('10\n20\n', "610"), TestCase('40\n40\n', "4883")],
-                  'prog_paycheck.c': [TestCase('10\n20\n', "781"), TestCase('12\n38\n', "1761")],
-                  'sphere_volume.c': [TestCase('1\n', "4.1"), TestCase('2.7\n', "82.4")]
+    test_cases = {'problem1.c':
+                    [TestCase("10\n", "3628800"),
+                    TestCase("3\n", "6")],
+                  'problem2.c':
+                    [TestCase("", "640000")],
+                  'problem3.c':
+                    [TestCase("1\n8\n9\n5\n", "17"),
+                    TestCase("4\n1\n4\n", ".25")]
                   }
 
     df = pd.DataFrame(columns=list(['netid', 'pc'] + list(test_cases.keys())))

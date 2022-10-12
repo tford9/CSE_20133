@@ -9,34 +9,25 @@ CC := gcc
 # CFLAGS are the required compiler flags for the CSE 20133 course
 CFLAGS :=
 
+problem1: problem1.o
+	$(CC) $(CFLAGS) -o problem1 problem1.o
 
-# Compilation for the problem1 program
-# Command: make problem1
-paycheck: paycheck.o
-	$(CC) $(CFLAGS) -o paycheck paycheck.o
+problem1.o:
+	$(CC) $(CFLAGS) -c problem1.c
 
-paycheck.o:
-	$(CC) $(CFLAGS) -c paycheck.c
+problem2: problem2.o
+	$(CC) $(CFLAGS) -o problem2 problem2.o
 
-number_scanner: number_scanner.o
-	$(CC) $(CFLAGS) -o number_scanner number_scanner.o
+problem2.o:
+	$(CC) $(CFLAGS) -c problem2.c
 
-number_scanner.o:
-	$(CC) $(CFLAGS) -c number_scanner.c
+problem3: problem3.o
+	$(CC) $(CFLAGS) -o problem3 problem3.o
 
-prog_paycheck: prog_paycheck.o
-	$(CC) $(CFLAGS) -o prog_paycheck prog_paycheck.o
+problem3.o:
+	$(CC) $(CFLAGS) -c problem3.c
 
-prog_paycheck.o:
-	$(CC) $(CFLAGS) -c prog_paycheck.c
-
-sphere_volume: sphere_volume.o
-	$(CC) $(CFLAGS) -o sphere_volume sphere_volume.o -lm
-
-sphere_volume.o: sphere_volume.c
-	$(CC) $(CFLAGS) -c sphere_volume.c -lm
-
-all: paycheck number_scanner sphere_volume prog_paycheck
+all: problem1 problem2 problem3
 
 clean:
-	rm -rf a.out *.o paycheck number_scanner sphere_volume prog_paycheck
+	rm -rf a.out *.o problem1 problem2 problem3
