@@ -2,8 +2,8 @@
 
 int main()
 {
-    unsigned int w = 40;
-    unsigned int h = 40;
+    unsigned int w = 400;
+    unsigned int h = 400;
 
     game_runner(w,h);
     return 0;

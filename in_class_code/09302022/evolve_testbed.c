@@ -17,7 +17,7 @@ int main()
     {
         evolve_board(board, w, h);
         show(board, w, h);
-        sleep(1);
+        // sleep(1);
     }
 }
 
