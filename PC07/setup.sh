@@ -8,3 +8,6 @@ wget https://raw.githubusercontent.com/tford9/CSE_20133/main/PC07/utilities.cpp
 wget https://raw.githubusercontent.com/tford9/CSE_20133/main/PC07/utilities.hpp
 wget https://raw.githubusercontent.com/tford9/CSE_20133/main/PC07/merge_sort.cpp
 wget https://raw.githubusercontent.com/tford9/CSE_20133/main/PC07/merge_sort.hpp
+
+# Download the Makefile 
+wget https://raw.githubusercontent.com/tford9/CSE_20133/main/PC07/Makefile
